@@ -3,6 +3,11 @@
 #include "Client.h"
 #include "Config.h"
 
+#ifdef RASPBERRY
+	#include "Glow.h"
+#endif
+
+#include <cmath>
 
 std::shared_ptr<Client> client;
 
@@ -13,6 +18,7 @@ void signalHandler(int signal)
 
 int main(int argc, char* argv[])
 {
+
 	std::cout << "Welcome to pibell client for " << PLATFORM << "!" << std::endl;
 
 	// Install our signal handlers to correctly exit the client
@@ -55,9 +61,13 @@ int main(int argc, char* argv[])
 		// Setup audio 
 		auto audio = std::make_shared<Audio>();
 		audio->setFile(settings.ringtone);
-
-		// Add call actions
 		client->addOnCall(audio);
+
+		#ifdef RASPBERRY
+			// Setup glow
+			auto glow = std::make_shared<Glow>(4000);
+			client->addOnCall(glow);
+		#endif
 
 		// Run the client
 		std::thread t([&ioService](){ ioService.run(); });

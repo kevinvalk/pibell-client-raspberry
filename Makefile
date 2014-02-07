@@ -4,7 +4,8 @@ SYS := $(shell gcc -dumpmachine)
 ifneq (, $(findstring arm-linux, $(SYS)))
 	CC=g++-4.7
 	CFLAGS=-c -std=c++11 -DRASPBERRY
-	LFLAGS=-lboost_system
+	LFLAGS=-lwiringPi -lwiringPiDev
+	SOURCES = Glow.cpp
 # For cygwin
 else ifneq (, $(findstring cygwin, $(SYS)))
 	CC=g++
@@ -14,8 +15,8 @@ endif
 
 # Source settings
 EXECUTABLE = pibell-client
-SOURCES = main.cpp Client.cpp Config.cpp Audio.cpp CallAction.cpp
-LFLAGS += -lboost_system -lboost_thread -lboost_chrono -lboost_filesystem -lao -ldl -lm
+SOURCES += main.cpp Client.cpp Config.cpp Audio.cpp CallAction.cpp
+LFLAGS += -lboost_system -lboost_filesystem -lao -ldl -lm
 
 # Force always to rebuild main
  .PHONY: $(EXECUTABLE)
