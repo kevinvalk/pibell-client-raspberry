@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Common.h"
-#include "CallAction.h"
+#include "../Common.h"
+#include "../Action.h"
 #include <ao/ao.h>
 
-class Audio : public CallAction
+class Audio : public Action
 {
 public:
 	Audio();

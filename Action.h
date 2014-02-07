@@ -2,9 +2,9 @@
 
 #include "Common.h"
 
-class CallAction
+class Action
 {
 public:
 	std::function<void(bool)> getOnCall();
-	virtual void onCall(bool global)  = 0;
+	virtual void onCall(bool global) = 0;
 };

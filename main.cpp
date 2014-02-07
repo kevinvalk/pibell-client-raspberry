@@ -1,13 +1,12 @@
 #include "Common.h"
-#include "Audio.h"
 #include "Client.h"
 #include "Config.h"
 
+// Actions
+#include "Action/Audio.h"
 #ifdef RASPBERRY
-	#include "Glow.h"
+	#include "Action/Glow.h"
 #endif
-
-#include <cmath>
 
 std::shared_ptr<Client> client;
 

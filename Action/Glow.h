@@ -1,11 +1,11 @@
-#include "Common.h"
-#include "CallAction.h"
+#include "../Common.h"
+#include "../Action.h"
 #include <wiringPi.h>
 #include <piGlow.h>
 
 #define GLOW_MS_PER_PASS 3067
 
-class Glow : public CallAction
+class Glow : public Action
 {
 public:
 	Glow(int totalTime);

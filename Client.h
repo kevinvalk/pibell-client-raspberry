@@ -2,14 +2,14 @@
 
 #include "Common.h"
 #include "Config.h"
-#include "CallAction.h"
+#include "Action.h"
 
 class Client
 {
 public:
 	Client(boost::asio::io_service& ioService, tcp::resolver::iterator endpointIterator, ClientSettings settings);
 	
-	void addOnCall(std::shared_ptr<CallAction> callAction);
+	void addOnCall(std::shared_ptr<Action> action);
 	void send(const Packet &packet);
 	void close();
 

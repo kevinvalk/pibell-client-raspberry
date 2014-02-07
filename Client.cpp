@@ -10,9 +10,9 @@ Client::Client(boost::asio::io_service& ioService, tcp::resolver::iterator endpo
 	doConnect(endpointIterator);
 }
 
-void Client::addOnCall(std::shared_ptr<CallAction> callAction)
+void Client::addOnCall(std::shared_ptr<Action> action)
 {
-	onCalls_.push_back(callAction->getOnCall());
+	onCalls_.push_back(action->getOnCall());
 }
 
 void Client::send(const Packet &packet)
