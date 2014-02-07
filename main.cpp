@@ -1,10 +1,8 @@
-#include "common.h"
-#include "client.h"
-#include "config.h"
-#include "audio.h"
+#include "Common.h"
+#include "Audio.h"
+#include "Client.h"
+#include "Config.h"
 
-#include <boost/asio.hpp>
-#include <csignal>
 
 std::shared_ptr<Client> client;
 

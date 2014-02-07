@@ -1,12 +1,8 @@
 #pragma once
 
-#include "common.h"
-#include "config.h"
-#include "audio.h"
-#include <boost/thread.hpp>
-#include <boost/asio.hpp>
-
-using boost::asio::ip::tcp;
+#include "Common.h"
+#include "Config.h"
+#include "Audio.h"
 
 class Client
 {

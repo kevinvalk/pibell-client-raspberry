@@ -1,23 +1,34 @@
 #pragma once
 
-#ifndef __MSABI_LONG
-	#if defined(__MSC_VER) || defined(__MINGW32__)
-		#define __MSABI_LONG(x)         x ## l
-	#else
-		#define __MSABI_LONG(x)         x
+#ifdef CYGWIN
+	#ifndef __MSABI_LONG
+		#if defined(__MSC_VER) || defined(__MINGW32__)
+			#define __MSABI_LONG(x)         x ## l
+		#else
+			#define __MSABI_LONG(x)         x
+		#endif
 	#endif
 #endif
 
+#define BOOST_FILESYSTEM_NO_DEPRECATED
+
+// Interprocess has to be first in all files so just load them first in common
+#include <boost/interprocess/file_mapping.hpp>
+#include <boost/interprocess/mapped_region.hpp>
+#include <boost/asio.hpp>
+
+#include <csignal>
 #include <cstdlib>
-#include <deque>
-#include <string>
 #include <cstring>
 #include <ctime>
+#include <deque>
 #include <thread>
+
+// Usings
+using boost::asio::ip::tcp;
 
 #ifdef CYGWIN
 	#define PLATFORM "cygwin"
-	#define M_PI 3.14159265358979323846
 #endif
 #ifdef RASPBERRY
 	#define PLATFORM "raspberry"

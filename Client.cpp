@@ -1,4 +1,4 @@
-#include "client.h"
+#include "Client.h"
 
 Client::Client(boost::asio::io_service& ioService, tcp::resolver::iterator endpointIterator, std::shared_ptr<Audio> audio, ClientSettings settings)
 	: ioService_(ioService), socket_(ioService)

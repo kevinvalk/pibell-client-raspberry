@@ -1,8 +1,7 @@
 #pragma once
 
-#define BOOST_FILESYSTEM_NO_DEPRECATED
+#include "Common.h"
 
-#include "common.h"
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/ini_parser.hpp>
 #include <boost/filesystem.hpp>
