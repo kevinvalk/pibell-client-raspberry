@@ -11,7 +11,6 @@ Glow::~Glow()
 {
 	noGlow_ = true;
 	fullGlow(0);
-	std::cout << "Shutdown glow" << std::endl;
 }
 
 bool Glow::notify(bool global)

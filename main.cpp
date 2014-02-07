@@ -2,6 +2,8 @@
 #include "Client.h"
 #include "Config.h"
 
+#define VERSION "1.0.0"
+
 // Actions
 #include "Action/Audio.h"
 #ifdef RASPBERRY
@@ -18,7 +20,7 @@ void signalHandler(int signal)
 int main(int argc, char* argv[])
 {
 
-	std::cout << "Welcome to pibell client for " << PLATFORM << "!" << std::endl;
+	std::cout << "Welcome to pibell-client version " << VERSION << "" << std::endl;
 
 	// Install our signal handlers to correctly exit the client
 	std::signal(SIGINT, signalHandler);

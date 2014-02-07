@@ -28,13 +28,6 @@
 // Usings
 using boost::asio::ip::tcp;
 
-#ifdef CYGWIN
-	#define PLATFORM "cygwin"
-#endif
-#ifdef RASPBERRY
-	#define PLATFORM "raspberry"
-#endif
-
 struct ClientSettings
 {
 	std::string hostname;

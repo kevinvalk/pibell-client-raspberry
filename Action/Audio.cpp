@@ -21,8 +21,6 @@ Audio::~Audio()
 {
 	ao_close(device_);
 	ao_shutdown();
-
-	std::cout << "Shutdown audio callable" << std::endl;
 }
 
 /**
