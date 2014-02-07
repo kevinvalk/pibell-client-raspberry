@@ -1,9 +1,10 @@
 #pragma once
 
 #include "Common.h"
+#include "CallAction.h"
 #include <ao/ao.h>
 
-class Audio
+class Audio : public CallAction
 {
 public:
 	Audio();
@@ -14,6 +15,8 @@ public:
 
 	bool setFile(std::string file);
 
+	void onCall(bool global);
+
 private:
 	void play_();
 
@@ -21,7 +24,6 @@ private:
 	ao_device *device_;
 	ao_sample_format format_;
 
-	boost::interprocess::file_mapping file_;
 	boost::interprocess::mapped_region region_;
 
 	std::thread thread_;

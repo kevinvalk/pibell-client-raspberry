@@ -43,20 +43,23 @@ int main(int argc, char* argv[])
 		exit(1);
 	}
 
-	// Initialize the audio
-	auto audio = std::make_shared<Audio>();
-
 	// Run the client
 	try
 	{
-		// Set up the server
+		// Set up the client
 		boost::asio::io_service ioService;
-
 		tcp::resolver resolver(ioService);
 		auto endpoint_iterator = resolver.resolve({ settings.hostname.empty() ? argv[1] : settings.hostname, settings.port.empty() ? argv[2] : settings.port });
-		client = std::make_shared<Client>(ioService, endpoint_iterator, audio, settings);
+		client = std::make_shared<Client>(ioService, endpoint_iterator, settings);
 
-		// Run the server
+		// Setup audio 
+		auto audio = std::make_shared<Audio>();
+		audio->setFile(settings.ringtone);
+
+		// Add call actions
+		client->addOnCall(audio);
+
+		// Run the client
 		std::thread t([&ioService](){ ioService.run(); });
 
 		// Wait for thread to terminate

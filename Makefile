@@ -14,7 +14,7 @@ endif
 
 # Source settings
 EXECUTABLE = pibell-client
-SOURCES = main.cpp Client.cpp Config.cpp Audio.cpp
+SOURCES = main.cpp Client.cpp Config.cpp Audio.cpp CallAction.cpp
 LFLAGS += -lboost_system -lboost_thread -lboost_chrono -lboost_filesystem -lao -ldl -lm
 
 # Force always to rebuild main

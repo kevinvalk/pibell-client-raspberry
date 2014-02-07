@@ -21,6 +21,8 @@ Audio::~Audio()
 {
 	ao_close(device_);
 	ao_shutdown();
+
+	std::cout << "Shutdown audio callable" << std::endl;
 }
 
 /**
@@ -34,11 +36,16 @@ bool Audio::setFile(std::string file)
 	// Only play once and do this non blocking
 	if ( ! isPlaying_)
 	{
-		file_ = boost::interprocess::file_mapping(file.c_str(), boost::interprocess::read_only);
-		region_ = boost::interprocess::mapped_region(file_, boost::interprocess::read_only);
+		boost::interprocess::file_mapping fileMapping(file.c_str(), boost::interprocess::read_only);
+		region_ = boost::interprocess::mapped_region(fileMapping, boost::interprocess::read_only);
 		return true;
 	}
 	return false;
+}
+
+void Audio::onCall(bool global)
+{
+	play();
 }
 
 /**

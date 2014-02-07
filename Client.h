@@ -2,13 +2,14 @@
 
 #include "Common.h"
 #include "Config.h"
-#include "Audio.h"
+#include "CallAction.h"
 
 class Client
 {
 public:
-	Client(boost::asio::io_service& ioService, tcp::resolver::iterator endpointIterator, std::shared_ptr<Audio> audio, ClientSettings settings);
+	Client(boost::asio::io_service& ioService, tcp::resolver::iterator endpointIterator, ClientSettings settings);
 	
+	void addOnCall(std::shared_ptr<CallAction> callAction);
 	void send(const Packet &packet);
 	void close();
 
@@ -27,7 +28,8 @@ private:
 	Packet receive_;
 	Packet send_;
 	PacketQueue sends_;
-
 	ClientSettings settings_;
-	std::shared_ptr<Audio> audio_;
+
+	// The onCall handlers
+	std::list<std::function<void(bool)>> onCalls_;
 };

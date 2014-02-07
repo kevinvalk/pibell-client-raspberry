@@ -1,15 +1,18 @@
 #include "Client.h"
 
-Client::Client(boost::asio::io_service& ioService, tcp::resolver::iterator endpointIterator, std::shared_ptr<Audio> audio, ClientSettings settings)
+Client::Client(boost::asio::io_service& ioService, tcp::resolver::iterator endpointIterator, ClientSettings settings)
 	: ioService_(ioService), socket_(ioService)
 {
 	// Initialize
-	audio_ = audio;
 	settings_ = settings;
-	audio_->setFile(settings_.ringtone);
 
 	// Connect our client
 	doConnect(endpointIterator);
+}
+
+void Client::addOnCall(std::shared_ptr<CallAction> callAction)
+{
+	onCalls_.push_back(callAction->getOnCall());
 }
 
 void Client::send(const Packet &packet)
@@ -39,7 +42,12 @@ void Client::handleCall()
 {
 	auto p = reinterpret_cast<PacketCall*>(&receive_);
 	std::cout << "Received call for " << (p->global ? "all" : "me") << " @ " << std::asctime(std::localtime(&p->time));
-	audio_->play();
+	
+	// Call all onCalls
+	for (auto onCall : onCalls_)
+	{
+		onCall(p->global);
+	}
 }
 
 void Client::handleReceive()
